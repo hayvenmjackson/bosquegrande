@@ -1,0 +1,122 @@
+# BosqueGrande hosted edition.
+# Run bin/init.sh once to create .env and the secrets folder, then bin/install.sh.
+name: bosquegrande
+
+services:
+  db:
+    image: ${DB_IMAGE:-mariadb:11.4}
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD_FILE: /run/secrets/db_password
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      MARIADB_AUTO_UPGRADE: "1"
+      # The upgrade backup would sit unencrypted in the data volume. Run
+      # bin/backup.sh before changing DB_IMAGE instead.
+      MARIADB_DISABLE_UPGRADE_BACKUP: "1"
+    volumes:
+      - db:/var/lib/mysql
+      - ./mariadb/encryption.cnf:/etc/mysql/conf.d/zz-encryption.cnf:ro
+      - ./secrets/mariadb_keyfile:/etc/mysql/encryption/keyfile:ro
+    secrets: [db_password, db_root_password]
+    networks: [backend]
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  wordpress:
+    build:
+      context: .
+      dockerfile: wordpress/Dockerfile
+      args:
+        WP_IMAGE: ${WP_IMAGE:-wordpress:php8.3-apache}
+    image: bosquegrande-hosted:5.0.0
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_password
+      WORDPRESS_AUTH_KEY_FILE: /run/secrets/wp_auth_key
+      WORDPRESS_SECURE_AUTH_KEY_FILE: /run/secrets/wp_secure_auth_key
+      WORDPRESS_LOGGED_IN_KEY_FILE: /run/secrets/wp_logged_in_key
+      WORDPRESS_NONCE_KEY_FILE: /run/secrets/wp_nonce_key
+      WORDPRESS_AUTH_SALT_FILE: /run/secrets/wp_auth_salt
+      WORDPRESS_SECURE_AUTH_SALT_FILE: /run/secrets/wp_secure_auth_salt
+      WORDPRESS_LOGGED_IN_SALT_FILE: /run/secrets/wp_logged_in_salt
+      WORDPRESS_NONCE_SALT_FILE: /run/secrets/wp_nonce_salt
+      WORDPRESS_CONFIG_EXTRA: "require '/etc/bosquegrande/wp-config-hosted.php';"
+      BG_DOMAIN: ${BG_DOMAIN}
+      BG_SUBDOMAINS: ${BG_SUBDOMAINS:-0}
+      BG_MASTER_KEY_FILE: /run/secrets/bg_master_key
+      BG_SMTP_HOST: ${BG_SMTP_HOST:-}
+      BG_SMTP_PORT: ${BG_SMTP_PORT:-587}
+      BG_SMTP_SECURE: ${BG_SMTP_SECURE:-tls}
+      BG_SMTP_USER: ${BG_SMTP_USER:-}
+      BG_SMTP_PASSWORD_FILE: /run/secrets/smtp_password
+      BG_MAIL_FROM: ${BG_MAIL_FROM:-}
+    secrets:
+      - db_password
+      - bg_master_key
+      - smtp_password
+      - wp_auth_key
+      - wp_secure_auth_key
+      - wp_logged_in_key
+      - wp_nonce_key
+      - wp_auth_salt
+      - wp_secure_auth_salt
+      - wp_logged_in_salt
+      - wp_nonce_salt
+    volumes:
+      - uploads:/var/www/html/wp-content/uploads
+      - state:/var/lib/bosquegrande
+    networks: [backend, frontend]
+
+  caddy:
+    image: ${CADDY_IMAGE:-caddy:2}
+    restart: unless-stopped
+    depends_on: [wordpress]
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      BG_DOMAIN: ${BG_DOMAIN}
+      BG_ACME_EMAIL: ${BG_ACME_EMAIL}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks: [frontend]
+
+networks:
+  frontend:
+  backend:
+    internal: true
+
+volumes:
+  db:
+  uploads:
+  state:
+  caddy_data:
+  caddy_config:
+
+secrets:
+  db_password: { file: ./secrets/db_password }
+  db_root_password: { file: ./secrets/db_root_password }
+  bg_master_key: { file: ./secrets/bg_master_key }
+  smtp_password: { file: ./secrets/smtp_password }
+  wp_auth_key: { file: ./secrets/wp_auth_key }
+  wp_secure_auth_key: { file: ./secrets/wp_secure_auth_key }
+  wp_logged_in_key: { file: ./secrets/wp_logged_in_key }
+  wp_nonce_key: { file: ./secrets/wp_nonce_key }
+  wp_auth_salt: { file: ./secrets/wp_auth_salt }
+  wp_secure_auth_salt: { file: ./secrets/wp_secure_auth_salt }
+  wp_logged_in_salt: { file: ./secrets/wp_logged_in_salt }
+  wp_nonce_salt: { file: ./secrets/wp_nonce_salt }

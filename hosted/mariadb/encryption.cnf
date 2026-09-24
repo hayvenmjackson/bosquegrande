@@ -1,0 +1,14 @@
+# Encrypt MariaDB data at rest: tables, redo log, temporary files, and binlogs.
+# The key file is created by bin/init.sh and mounted read-only.
+[mariadb]
+plugin_load_add = file_key_management
+file_key_management_filename = /etc/mysql/encryption/keyfile
+file_key_management_encryption_algorithm = AES_CTR
+innodb_encrypt_tables = FORCE
+innodb_encrypt_log = ON
+innodb_encrypt_temporary_tables = ON
+innodb_encryption_threads = 2
+encrypt_tmp_disk_tables = ON
+encrypt_tmp_files = ON
+encrypt_binlog = ON
+aria_encrypt_tables = ON

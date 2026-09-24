@@ -1,0 +1,35 @@
+# BosqueGrande hosted edition: TLS and security headers in front of WordPress.
+# Subdirectory networks (crm.example.org/your-org/) need only this site block.
+# Subdomain networks (your-org.crm.example.org) need a wildcard certificate;
+# see README.md.
+{
+	email {$BG_ACME_EMAIL}
+}
+
+{$BG_DOMAIN} {
+	encode zstd gzip
+
+	@blocked {
+		path /xmlrpc.php /readme.html /license.txt /wp-config.php /wp-content/debug.log
+		path /wp-content/uploads/bg-fixtures/* /wp-content/uploads/sites/*/bg-fixtures/*
+		path *.sql *.bak *.log
+	}
+	respond @blocked 404
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Frame-Options "SAMEORIGIN"
+		-Server
+		-X-Powered-By
+	}
+
+	# Public pages: BosqueGrande's own markup plus Stripe for payments.
+	@public not path /wp-admin/* /wp-login.php /*/wp-admin/* /*/wp-login.php
+	header @public Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com https://*.js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.stripe.com https://link.com https://*.link.com; frame-src https://js.stripe.com https://*.js.stripe.com https://hooks.stripe.com https://link.com https://*.link.com https://www.youtube-nocookie.com https://www.youtube.com https://player.vimeo.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://checkout.stripe.com; object-src 'none'"
+
+	reverse_proxy wordpress:80 {
+		header_up X-Forwarded-Proto {scheme}
+	}
+}

@@ -1,0 +1,342 @@
+BOSQUEGRANDE 5.0 STAFF REFERENCE
+
+PURPOSE AND SUPPORT
+
+This plain-text reference grounds the BosqueGrande Assistant. Your organization may replace it with its own guide through the bg_assistant_docs filter.
+
+Your site's administrator is the first line of support. When the Assistant cannot answer from this reference and the site's aggregate facts, it can email the calendar's designated contact, the WordPress administration email address, or another internal address the site owner has configured. BosqueGrande has no vendor help line and makes no promise about support hours. Follow your organization's own support process.
+
+Never paste names, email addresses, phone numbers, street addresses, payment details, demographic answers, medical information, sign-in links, tokens, or other private records into the Assistant. The Assistant has no tools and cannot change records.
+
+ACCESS AND PRIVACY
+
+Administrator
+- Uses people, mail, money, exports, grant reports, organizer review, settings, and system controls.
+- Administrator access exposes personal records, destructive actions, financial details, exports, keys, and configuration. Do not hand it out for convenience.
+
+WordPress account with event-editing permission
+- Uses Events and Photos according to the capabilities assigned to the account.
+- Publishing, Tags & Regions, Site Audit, organizer assignment, and system access may need administrator capabilities.
+
+Event Organizer
+- Uses only actively assigned, published events in the Organizer App or Organizer Portal.
+- Each event permission is checked separately. One permission does not grant the others.
+
+Accountant
+- Opens the separate Accounting menu in the WordPress dashboard.
+- Can read the revenue ledger, Event Statistics, and event money, including details allowed to that role.
+- Cannot refund, map or export QuickBooks rows, reconcile, accept or reopen closeouts, decide intake reviews, or void payments.
+
+Everyday privacy rules
+- Use your own account, never a shared login.
+- Open only the information the current task needs.
+- Check a person's contact-sharing choice before sharing their details with an event host.
+- Never copy demographic answers into notes, email, text messages, paper, or outside tools.
+- Keep CSV files only where your organization stores them, and delete working copies under its retention policy.
+- A shared email, phone number, address, or household does not prove two records are one person.
+- Do not repeat Send, Export, Refund, Merge, Import, Delete, Anonymize, key rotation, or Reinstall after an uncertain result.
+
+FINDING BOSQUEGRANDE IN WORDPRESS
+
+BosqueGrande has six section pages. Open a section from the WordPress sidebar, then use its cards or tabs.
+
+People & Mail: Constituents, Duplicate Finder, Newsletters, Newsletter Archive, Subscriber Groups, Newsletter Templates, Correspondence.
+Money: Donations (or Revenue), Payment Setup.
+Events: Events, Event Organizers, Organizer App Review, Tags & Regions, Grant Tags, Photos, Event Statistics, Surveys and Mail Release, Site Audit, Adopt Events, Event Retagging.
+Data & Connections: Connectors, Import Studio, Data Transfer, Duplicate Review.
+Reports & Assisted Tools: Grant Reporting, Insights, Assistant, Assisted Tools.
+Settings & System Health: Wording & Styling, Settings, Setup, System Status.
+
+If a card is missing, your account probably lacks that capability. Ask your administrator for the specific task and screen instead of asking for full administrator access.
+
+FIRST-TIME SETUP
+
+Settings holds everything that belongs to your organization: its name, legal name, payee name, contact email and phone, logo, and whether it is a nonprofit. It also holds the keys you bring: Stripe, the email relay, the optional assistant, Little Green Light, and Eventbrite. Every key is stored encrypted. Nothing is preconfigured, and each connection stays off until you add its key.
+
+Settings > Registration controls the registration options (for example Free, Member, or Supporter, with an amount for each) and which optional questions appear: demographics, age range, how the person heard about you, promotion consent, and relationship to the organization. Each question can be turned off, optional, or required, and its answer choices are editable.
+
+Tags & Regions holds your event vocabulary: the regions you serve and the interest tags visitors filter by. It also holds the tagging rules and the postal-code rules that place people and events into regions.
+
+EVENTS
+
+Create an event
+Route: BosqueGrande > Events > Events > Add Event
+
+1. Enter the public event title.
+2. Write the event description. Use Visual for normal editing and Text only for intentional HTML.
+3. Enter the start date and time. Add an end date for a multi-day event. If the end time is blank, the page shows a one-hour duration.
+4. Enter the venue, town and state, or a clear online location in Location. Region matching and Grant Reporting use Location first.
+5. Choose or upload the event photo.
+6. Enter a readable URL ending and choose Set URL.
+7. Apply the region and interest tags that fit, and every Grant Tag that applies. More than one grant may apply.
+8. Under "Options offered for this event", leave every box checked to offer all options, or check only the ones this event offers.
+9. Publish and wait for the saved notice.
+
+Optional search-preview fields
+- Short Title and Short Description only affect search previews. They do not replace the event title or description.
+
+Grant Tags
+- Grant Tags are internal reporting labels, separate from the region and interest tags visitors see.
+- Each Grant Tag can have rules: a date range, required event tags, and keywords. Events that match get the tag suggested automatically. Suggestions add tags; they never remove a staff choice.
+- Removing a wrong automatic tag and saving is remembered, so the tag is not added back automatically.
+- One event may carry several Grant Tags. Their totals overlap and must not be added together.
+- A missing automatic tag means the rules found no match, not that the event is ineligible.
+
+Edit and check an event
+Route: BosqueGrande > Events > Events > open the event
+
+- Confirm the title and date before editing one event in a series.
+- Change only what is needed, choose Update, and wait for confirmation.
+- View the public page while logged out when possible. It should show the event title, date and time, location, photo, description, tags, a link back to the calendar, and the right registration button.
+- Built-in registration is automatic. Do not paste a separate registration URL while built-in registration is on.
+- Events > Photos fixes missing photos in bulk.
+- Site Audit is for administrators. Ask your administrator to run it after large batches.
+
+Ended events
+- Only published events that have not ended accept registration.
+- An ended event says so and shows no Register button.
+- A saved or cached registration link for an ended event returns "Registration has ended" before any identity, payment, or write work.
+- If an ended event still seems to accept a form, note the URL and time, stop resubmitting, and tell your administrator.
+
+Event Retagging
+Route: BosqueGrande > Events > Event Retagging
+- Re-runs the tagging rules over every event after you change the vocabulary or rules.
+- The optional assistant pass suggests tags for events the rules could not place. Review the results.
+
+CONSTITUENTS
+
+Find the right person
+Route: BosqueGrande > People & Mail > Constituents
+
+- Search by name, email, phone, address, record ID, or LGL ID.
+- Compare several fields, and use the record ID when records look alike.
+- Quick views and filters narrow a task; they are not proof of identity.
+- If no safe match exists, create a separate record. Do not force an uncertain match.
+
+Add a constituent
+Route: BosqueGrande > People & Mail > Constituents > Add New
+
+1. Search first.
+2. Enter the person's own name and only the contact details you need.
+3. Enter an LGL ID only when it is certainly the same person. One LGL ID cannot belong to two active records.
+4. Enter alternate emails one per line. They help verify profile sign-in; newsletters use the primary email.
+5. Prefer Auto-assign from address for the region. A manual region, or an intentional None, is never overwritten automatically.
+6. Add only relevant notes, tags, monthly-donor status, and approved custom fields.
+7. Choose Create record and confirm the saved notice.
+
+Edit a constituent
+- Confirm the name and record ID.
+- Check the contact-sharing choice before sharing details with an event host.
+- Correct fields and choose Save changes.
+- Saving does not push to or pull from LGL. Those are separate, deliberate actions.
+- Do not overwrite one household member with another because they share contact details.
+
+Merge duplicates
+Route: BosqueGrande > People & Mail > Duplicate Finder
+
+1. Keep the standard confidence threshold unless your administrator has a documented reason to change it.
+2. Choose Scan for duplicates.
+3. Review each pair; suggestions start unchecked.
+4. Select only pairs that are certainly the same person.
+5. Choose Merge selected and review the result.
+
+A merge keeps the more complete record, fills blanks, combines history and tags, moves related records, and retires the other record. Unsubscribe wins: if either record was unsubscribed, the survivor stays unsubscribed. A merge may be refused when the records link to different LGL people. Never merge at the event door or while identity is uncertain.
+
+Anonymize and Delete selected cannot be undone. Anonymize erases personal values but keeps an empty historical row. Delete selected removes the record and its related history. Neither replaces unsubscribe or merge. Use them only under your organization's privacy and retention policy.
+
+MONEY AND QUICKBOOKS ONLINE
+
+Administrator route: BosqueGrande > Money > Donations
+Accountant route: WordPress dashboard > Accounting
+
+The Donations screen has Recent activity, Saved export copies, Mappings, and the Review queue. Only an administrator can refund, manage mappings, mark reviews handled, or export.
+
+QuickBooks sales receipts
+- BosqueGrande creates a paid Sales Receipt worksheet for money already received. It does not post to QuickBooks or create customer debt.
+- Test with + Create > Batch transactions > Sales Receipts > Import CSV. The TEST worksheet changes no payment, export, or review state. Turn on production export only after the real QuickBooks company maps each line's Class correctly.
+- Each file holds at most 100 receipts and 999 data lines plus the header. Receipts are never split across files, and finished batches keep an encrypted Download again copy.
+- Exports use gross receipts. Reconcile Stripe fees separately. Refunds wait for the bookkeeper's QuickBooks refund workflow; never send the money again.
+
+Mapping rules
+- Choose Map beside a real transaction. The order is: this transaction, same type and description, same type and payment route, all remaining of that type, then Review.
+- Product/Service and deposit accounts must use names your bookkeeper approved.
+- Class by region (optional) assigns a Class from the donor's current mailing address when a mapping leaves Class blank. It never changes the contact's saved region.
+- One fixed Class is 100% and overrides the region default. For two to ten Classes, enter exact names and percentages that total 100.00%. Cents are preserved and gross is never duplicated.
+- Grant Tags are shown for context only. BosqueGrande never invents a split, a Product/Service, or an account.
+- An invalid higher-priority rule waits in Review; it never falls through to a broader rule. Edit or delete a bad rule before export.
+
+Export and import
+1. Review Recent activity, Details, mappings, and the Review queue.
+2. Download the TEST worksheet and check every Sales Receipt and Class field in a QuickBooks test company. Then record the confirmation.
+3. Choose Download Sales Receipt CSV once and keep its bg-qbo-sales-receipts file name.
+4. If the file is lost, use Saved export copies > Download again. Do not create a replacement batch.
+5. In QuickBooks use + Create > Batch transactions > Sales Receipts > Import CSV.
+6. Check customers, dates, items, Classes, deposit accounts, and totals. The lines for each receipt must equal its gross payment.
+7. Record the batch, file name, import date, QuickBooks result, and the separate fee reconciliation.
+8. Do not rerun a whole file after a partial QuickBooks failure.
+
+Review queue
+- No customer name: verify the constituent, correct the name, save, and run the export again.
+- No mapping: choose Map and create the narrowest approved rule.
+- Invalid allocation: fix blanks, duplicate Classes, zero shares, or a total other than exactly 100.00%.
+- Refund: Stripe has already returned the money. Complete the accounting-only QuickBooks step without sending funds again, then choose Mark accounting recorded in QBO once.
+- A review item closes automatically once its corrected row exports. If it does not, note the payment number and export file name for your administrator.
+
+GRANT REPORTING
+
+Route: BosqueGrande > Reports & Assisted Tools > Grant Reporting
+Administrators only.
+
+1. Start a new report.
+2. If a notice says Grant Tags are still being applied, work elsewhere and refresh before filing a grant-filtered report.
+3. Enter a title, start date, and end date. Funder and grant reference are optional.
+4. Choose participant home region, event location region, both, or neither.
+5. Choose small-group privacy: suppress below 3, suppress below 5, or exact overall counts. Trend cells always keep a threshold of at least 3.
+6. Choose trend intervals.
+7. Use all eligible events or selected events. The date range always applies.
+8. Pick one Grant Tag when the report is for one grant. All grant tags means no grant filter.
+9. Choose event tags only when the grant requires them. Grant and tag filters both apply when both are set.
+
+Region settings
+- "Participants live in" uses each constituent's saved region.
+- "Events held in" uses the event Location.
+- If an event's region is wrong, fix its Location and refresh. Do not edit report totals by hand.
+
+Event eligibility
+- Drafts are never reported.
+- An event Eventbrite turned back into a draft is left out of all-events mode. It can be included only by selecting it on purpose.
+
+Staff-entered fields
+- Award amount, amount received, expenses, other income, in-kind value, verified attendance, volunteer hours, targets, objectives, activities, outcomes, challenges, and next steps are staff context, not calculated values, and stay labeled that way.
+- Never enter names, contact details, private answers, medical information, or identifiable stories into narrative or assisted-writing fields.
+
+After generating or refreshing a report, confirm the scope and read the data-quality notes. Registrations are not verified attendance. Unlinked registrations may be missing from unique-person totals. Money recorded only in LGL is missing unless it was imported. Events with several tags can appear in more than one total, and overlapping grant totals must not be added together.
+
+Save report snapshot keeps a copy of the report. Download summary CSV gives totals; Download event CSV supports event-level review; Print / save as PDF makes a fixed copy. Refreshing a saved snapshot replaces it, so keep the earlier PDF if you need both versions.
+
+NEWSLETTERS
+
+Route: BosqueGrande > People & Mail > Newsletters
+Administrators only.
+
+Scheduled and unattended newsletter sending is off. Save for later sends nothing. Release now asks for fresh confirmation every time.
+
+Test
+1. Enter a subject and choose a template.
+2. Write in Visual mode; use Text only for intentional HTML.
+3. Enter up to 25 test addresses and do not select a subscriber group.
+4. Select Release now, check the one-time confirmation, and choose Continue.
+5. Check the received message on a computer and a phone: sender, links, images, spacing, and the unsubscribe footer.
+6. Remove the test addresses before sending to a group.
+
+Sending to a group
+- Select exactly one active subscriber group.
+- Recheck the subject, content, links, template, sender, and audience.
+- Check the confirmation, choose Release now, and read the queued and suppressed counts.
+- Delivery continues in the background. Do not click Release again.
+- Correspondence has the mail test and the send log.
+
+Consent
+- Active subscriber groups are the newsletter list. A new group appears in Compose, My Profile, and event registration.
+- Archived groups disappear from those places but keep their consent history.
+- Unsubscribe links keep working after a group is archived.
+- Suppression and unsubscribe override group membership at send time.
+- Every newsletter template must keep {unsubscribe_url}.
+- Never add consent for someone or resubscribe them to fix a send.
+
+FOLLOW-UP MESSAGES
+
+Route: BosqueGrande > Events > Surveys and Mail Release > Follow-up Messages
+Administrators only.
+
+- Event reminders go out about 48 hours before an event when the person registered early enough.
+- Survey messages go out two days after attendance is recorded in the Organizer App.
+- Newcomer welcome and My Profile invitations go out four days after the event, at least two days after the survey, only to verified first-time attendees who agreed to follow-up.
+
+Automatic sending stays off until an administrator turns on each message type. Review-first sending of up to 25 at a time is always available. A mail relay refusal stops the batch. Each accepted message is stamped before its row can be picked again. Imported past events never trigger follow-up mail.
+
+EVENT ORGANIZERS
+
+Assign
+Route: BosqueGrande > Events > Event Organizers
+Administrators only.
+
+1. Enter the organizer's email and an optional display name.
+2. Select a published event.
+3. Choose the role: Organizer or Host.
+4. Grant only the permissions the event needs.
+5. Choose Create or update assignment.
+6. Check the active assignment and its permissions.
+7. Revoke it when the work ends.
+
+Event permissions
+- Check in attendees
+- Register walk-ins
+- Record cash and check payments
+- Open attendee privacy mode
+- Submit event closeout
+- Email attendees
+- Export the event roster
+- Create and propose event changes
+
+The Organizer App lives at /bg-organizer-app/. Installing it is optional. It needs a live connection and stores no roster, payment, profile, or private-answer data on the device. Only actively assigned published events appear.
+
+At the event
+- Never merge an uncertain person at the door. Keep the record for staff review.
+- Cash and check only. The event fee and any extra donation are recorded separately.
+- Never enter card, bank, or routing details.
+- The attendee, not the organizer, enters private answers during the one-time, 15-minute handoff.
+- Submit the closeout after attendance and money are complete. Submitting locks organizer changes until staff accept or reopen it.
+
+Staff review
+Route: BosqueGrande > Events > Organizer App Review
+
+- Review uncertain walk-ins and monthly-giving follow-ups.
+- Review closeout totals, check counts, differences, and explanations.
+- Choose Accept when complete, or Reopen so the organizer can correct and resubmit.
+- Use Void with ledger correction for a cash or check mistake. A correcting entry is added and the original is kept.
+- The operations CSV is limited for privacy; use it only for an approved task.
+
+MY PROFILE AND REGISTRATION
+
+My Profile
+- A signed-out person enters their first name, last name, and email, then chooses Email me a sign-in link.
+- The link works once and lasts 15 minutes.
+- A verified device can stay signed in for up to 365 days unless cleared or revoked.
+- The person can update phone and address, sharing preference, optional answers, newsletter choices, and supported monthly-donation settings.
+- The primary email cannot be changed there. Staff must verify a new address before editing the record, so subscriptions never move to an unverified address.
+- Newsletter boxes come from active subscriber groups. Checking subscribes; clearing records an unsubscribe.
+- "Prefer not to say" is a valid answer on its own.
+- Saving updates the encrypted record on this site. It does not push to LGL.
+- Staff never ask for a password, sign-in code, or sign-in link.
+
+Registration
+- First name, last name, and a valid email are required.
+- Other questions appear, and are required, according to Settings > Registration.
+- Returning visitors can request a sign-in link to prefill the form.
+- Signed-in visitors see their current newsletter choices and may change them.
+- Anonymous and forwarded forms show empty newsletter boxes. Checked boxes get a confirmation link; unchecked boxes never unsubscribe anyone.
+- A confirmation link cannot override a newer unsubscribe.
+- Registration options and payment depend on the event and the Stripe setup.
+- The confirmation email includes your organization's contact details when they are set.
+- Staff never collect card details by email, phone, notes, or chat.
+
+DATA AND CONNECTIONS
+
+Connectors sets the Little Green Light sync direction and shows each outside service's status. Import Studio maps CSV, TSV, or XLSX files with a dry run and rollback. Data Transfer brings in events from Eventbrite and Little Green Light on demand or on a schedule. Duplicate Review handles duplicate transferred events, not people.
+
+Imports, sync direction, rollback, and connector keys can change many records at once and are administrator work. Keep the original file untouched and work on a dated copy. Map columns deliberately, run the full dry run, read the skipped, ambiguous, duplicate, and validation counts, and confirm only when you understand the result.
+
+TROUBLESHOOTING
+
+Stop, check, capture, escalate.
+
+1. Stop repeating the action.
+2. Use only the safe controls the screen offers.
+3. Read the exact message, then check the related review queue, audit, send log, or status screen.
+4. Capture the screen title, URL, date, time and time zone, your role, the record ID, what you expected, what happened, the last thing that worked, and a screenshot with no private data.
+5. Send that to your administrator.
+
+System Status is for administrators and includes the emergency-key, key-rotation, and migration-retry controls. Never rotate a key, retry a migration, or reinstall just to see what happens.
+
+Your organization's administrators are responsible for accounts, QuickBooks, mail, Stripe, privacy, retention, connectors, and hosting decisions.

@@ -1,0 +1,53 @@
+#!/bin/bash
+# Container start: put the image's code in place, then start Apache through the
+# official entrypoint, plus a loop that runs due WordPress cron events for
+# every site once a minute (WP-Cron's page-load trigger is turned off in
+# wp-config-hosted.php).
+set -euo pipefail
+
+root=/var/www/html
+
+# /var/www/html is a volume declared by the base image, so it survives image
+# rebuilds and would keep serving old code. Replace everything in it except
+# uploads with the copy baked into this image, owned by root so PHP cannot
+# rewrite its own code. wp-config.php is rebuilt from the image's template;
+# it reads every secret from /run/secrets at runtime.
+sync_code() {
+  find "$root" -mindepth 1 -maxdepth 1 ! -name wp-content -exec rm -rf {} +
+  if [ -d "$root/wp-content" ]; then
+    find "$root/wp-content" -mindepth 1 -maxdepth 1 ! -name uploads -exec rm -rf {} +
+  fi
+  tar -C /usr/src/wordpress --exclude=./wp-content/uploads -cf - . \
+    | tar -C "$root" -xf - --no-same-owner --no-same-permissions
+  cp /usr/src/wordpress/wp-config-docker.php "$root/wp-config.php"
+  find "$root" -path "$root/wp-content/uploads" -prune -o -exec chown root:root {} +
+  find "$root" -path "$root/wp-content/uploads" -prune -o -type d -exec chmod 0755 {} +
+  find "$root" -path "$root/wp-content/uploads" -prune -o -type f -exec chmod 0644 {} +
+  install -d -o www-data -g www-data -m 0755 "$root/wp-content/uploads"
+  chown www-data:www-data "$root/wp-content/uploads"
+  for d in /var/lib/bosquegrande /var/lib/bosquegrande/keyrings /var/lib/bosquegrande/private; do
+    install -d -o www-data -g www-data -m 0700 "$d"
+  done
+}
+
+cron_loop() {
+  set +e
+  sleep 20
+  # Always run wp-cli as www-data: WordPress may create keyring files, and
+  # a root-owned keyring would be unreadable by the web server.
+  wpw() { runuser -u www-data -- env HOME=/tmp wp --path="$root" "$@"; }
+  while true; do
+    if wpw core is-installed --network >/dev/null 2>&1; then
+      for url in $(wpw site list --field=url --deleted=0 --archived=0 2>/dev/null); do
+        wpw cron event run --due-now --url="$url" >/dev/null 2>&1 || true
+      done
+    elif wpw core is-installed >/dev/null 2>&1; then
+      wpw cron event run --due-now >/dev/null 2>&1 || true
+    fi
+    sleep 60
+  done
+}
+
+sync_code
+cron_loop &
+exec docker-entrypoint.sh apache2-foreground

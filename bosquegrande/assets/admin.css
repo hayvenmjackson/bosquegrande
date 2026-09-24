@@ -1,0 +1,854 @@
+/**
+ * BosqueGrande admin skin. Scoped entirely by the admin body
+ * classes WordPress adds on BosqueGrande pages, so no page markup needed
+ * changing. Tokens: Ink #1F2A24, Canopy #1F5130, Fern #2E7D4F,
+ * Gold #C98A1B, Mist #F2F7F2, Line #D9E5D9. Signature: the canopy bar,
+ * a slim canopy-to-fern-to-gold rule under every page title, echoing
+ * the public registration buttons.
+ */
+
+body[class*="page_bosquegrande"] #wpbody-content {
+    background:
+        linear-gradient(180deg, #F2F7F2 0%, #F7FAF7 320px, transparent 320px);
+}
+
+body[class*="page_bosquegrande"] .wrap {
+    max-width: 1040px;
+    font-family: Inter, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #1F2A24;
+}
+
+body[class*="page_bosquegrande"] .wrap > h1 {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #1F2A24;
+    padding-bottom: 10px;
+    position: relative;
+}
+body[class*="page_bosquegrande"] .wrap > h1::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 72px;
+    height: 4px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #1F5130 0%, #2E7D4F 70%, #C98A1B 100%);
+}
+
+body[class*="page_bosquegrande"] h2.title,
+body[class*="page_bosquegrande"] .wrap h2 {
+    color: #1F5130;
+    font-weight: 650;
+    letter-spacing: -0.005em;
+}
+
+body[class*="page_bosquegrande"] .wrap > p,
+body[class*="page_bosquegrande"] .wrap ol {
+    color: #3C4A42;
+}
+
+/* Tables become cards. */
+body[class*="page_bosquegrande"] table.widefat {
+    border: 1px solid #D9E5D9;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(31,42,36, 0.05);
+}
+body[class*="page_bosquegrande"] table.widefat thead th {
+    background: #EAF1EC;
+    color: #1F5130;
+    font-weight: 650;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+body[class*="page_bosquegrande"] table.widefat.striped > tbody > :nth-child(odd) {
+    background: #FAFCFA;
+}
+body[class*="page_bosquegrande"] table.widefat td {
+    color: #1F2A24;
+}
+
+/* Buttons in the plugin's own voice. */
+body[class*="page_bosquegrande"] .button-primary {
+    background: #1F5130;
+    border-color: #1F5130;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.15s ease;
+}
+body[class*="page_bosquegrande"] .button-primary:hover,
+body[class*="page_bosquegrande"] .button-primary:focus {
+    background: #2A6B40;
+    border-color: #2A6B40;
+}
+body[class*="page_bosquegrande"] .button {
+    border-radius: 8px;
+}
+body[class*="page_bosquegrande"] .button:not(.button-primary) {
+    border-color: #C4D6C4;
+    color: #1F5130;
+}
+body[class*="page_bosquegrande"] .button:not(.button-primary):hover {
+    border-color: #1F5130;
+    background: #F2F7F2;
+    color: #1F5130;
+}
+body[class*="page_bosquegrande"] .button:focus-visible,
+body[class*="page_bosquegrande"] .button-primary:focus-visible {
+    outline: 2px solid #2E7D4F;
+    outline-offset: 1px;
+    box-shadow: none;
+}
+
+/* Notices carry the palette. */
+body[class*="page_bosquegrande"] .notice-info {
+    border-left-color: #2E7D4F;
+}
+body[class*="page_bosquegrande"] .notice-warning {
+    border-left-color: #C98A1B;
+}
+
+/* Forms. */
+body[class*="page_bosquegrande"] .form-table th {
+    color: #1F2A24;
+    font-weight: 600;
+}
+body[class*="page_bosquegrande"] .form-table .description {
+    color: #5A6A61;
+}
+
+/* Explicit Yes/No switch used by boolean constituent fields. */
+body[class*="page_bosquegrande"] .bg-yesno-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+body[class*="page_bosquegrande"] .bg-yesno-toggle input {
+    position: absolute;
+    opacity: 0;
+}
+body[class*="page_bosquegrande"] .bg-yesno-track {
+    position: relative;
+    width: 46px;
+    height: 24px;
+    border-radius: 999px;
+    background: #8C8F94;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+    transition: background .15s ease;
+}
+body[class*="page_bosquegrande"] .bg-yesno-track::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #FFF;
+    box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    transition: transform .15s ease;
+}
+body[class*="page_bosquegrande"] .bg-yesno-toggle input:checked + .bg-yesno-track {
+    background: #2271B1;
+}
+body[class*="page_bosquegrande"] .bg-yesno-toggle input:checked + .bg-yesno-track::after {
+    transform: translateX(22px);
+}
+body[class*="page_bosquegrande"] .bg-yesno-toggle input:focus-visible + .bg-yesno-track {
+    outline: 2px solid #2271B1;
+    outline-offset: 2px;
+}
+body[class*="page_bosquegrande"] input.regular-text,
+body[class*="page_bosquegrande"] input[type="number"],
+body[class*="page_bosquegrande"] select,
+body[class*="page_bosquegrande"] textarea.large-text {
+    border-color: #C4D6C4;
+    border-radius: 8px;
+}
+body[class*="page_bosquegrande"] input:focus,
+body[class*="page_bosquegrande"] select:focus,
+body[class*="page_bosquegrande"] textarea:focus {
+    border-color: #2E7D4F;
+    box-shadow: 0 0 0 1px #2E7D4F;
+}
+
+body[class*="page_bosquegrande"] code {
+    background: #EAF1EC;
+    color: #1F5130;
+    border-radius: 4px;
+}
+
+/* ----------------------------------------------------------------
+   v2.1: Home dashboard (cards and health chips)
+   ---------------------------------------------------------------- */
+
+body[class*="page_bosquegrande"] .bg-health {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 4px 0 20px;
+}
+body[class*="page_bosquegrande"] .bg-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid #D9E5D9;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1F5130;
+}
+body[class*="page_bosquegrande"] .bg-chip span {
+    font-weight: 500;
+    color: #5A6A61;
+}
+body[class*="page_bosquegrande"] .bg-chip-warn {
+    border-color: #C98A1B;
+    color: #8a6d00;
+}
+
+body[class*="page_bosquegrande"] .bg-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin-top: 8px;
+}
+body[class*="page_bosquegrande"] .bg-card {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: #fff;
+    border: 1px solid #D9E5D9;
+    border-radius: 12px;
+    padding: 16px;
+    text-decoration: none;
+    box-shadow: 0 1px 2px rgba(31,42,36, 0.05);
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+body[class*="page_bosquegrande"] .bg-card:hover,
+body[class*="page_bosquegrande"] .bg-card:focus {
+    border-color: #2E7D4F;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(31,42,36, 0.08);
+}
+body[class*="page_bosquegrande"] .bg-card .dashicons {
+    color: #1F5130;
+    font-size: 26px;
+    width: 26px;
+    height: 26px;
+    margin-top: 1px;
+}
+body[class*="page_bosquegrande"] .bg-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+body[class*="page_bosquegrande"] .bg-card-body strong {
+    color: #1F2A24;
+    font-size: 14px;
+}
+body[class*="page_bosquegrande"] .bg-card-body span {
+    color: #5A6A61;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+/* Section subheads on the Home card dashboard. */
+body[class*="page_bosquegrande"] .bg-section-title {
+    margin: 26px 0 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: #5A6A61;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #D9E5D9;
+    max-width: 1040px;
+}
+body[class*="page_bosquegrande"] .bg-section-title:first-of-type {
+    margin-top: 18px;
+}
+body[class*="page_bosquegrande"] .bg-section-title a {
+    color: inherit;
+    text-decoration: none;
+}
+body[class*="page_bosquegrande"] .bg-section-title a:hover {
+    color: #1F5130;
+}
+
+/* -------------------------------------------------------------------
+ * The section band. Printed above every screen belonging to
+ * one of the six sections, including WordPress-native screens (the
+ * event and newsletter lists, the Locations taxonomy), so it is
+ * scoped by its own class rather than the body class.
+ * ------------------------------------------------------------------- */
+.bg-secband {
+    background: #fff;
+    border-bottom: 1px solid #D9E5D9;
+    margin: 0 0 0 -20px;
+    padding: 12px 20px 0 22px;
+    position: relative;
+    font-family: Inter, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+.bg-secband::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #1F5130 0%, #2E7D4F 70%, #C98A1B 100%);
+}
+.bg-secband-brand a {
+    color: #1F5130;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.bg-secband-brand a:hover {
+    color: #2E7D4F;
+}
+.bg-secband h2 {
+    margin: 2px 0 10px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #1F2A24;
+}
+.bg-sectabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.bg-sectab {
+    display: inline-block;
+    padding: 8px 13px;
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    color: #3C4A42;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: none;
+}
+.bg-sectab:hover,
+.bg-sectab:focus {
+    background: #F2F7F2;
+    color: #1F5130;
+    box-shadow: none;
+}
+.bg-sectab.active {
+    background: #F2F7F2;
+    border-color: #D9E5D9;
+    color: #1F5130;
+    font-weight: 600;
+    position: relative;
+}
+.bg-sectab.active::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 0;
+    height: 3px;
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(90deg, #1F5130 0%, #2E7D4F 70%, #C98A1B 100%);
+}
+@media screen and (max-width: 782px) {
+    .bg-secband {
+        margin-left: -10px;
+        padding-left: 12px;
+    }
+}
+
+/* Section landing pages. */
+body[class*="page_bosquegrande"] .bg-landing .bg-lead {
+    max-width: 720px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+body[class*="page_bosquegrande"] .bg-spotlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0 0;
+    padding: 10px 14px;
+    background: #fff;
+    border: 1px solid #D9E5D9;
+    border-radius: 10px;
+    color: #1F2A24;
+    font-size: 13px;
+}
+body[class*="page_bosquegrande"] .bg-spotlight .dashicons {
+    color: #2E7D4F;
+}
+body[class*="page_bosquegrande"] .bg-notes {
+    max-width: 760px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+body[class*="page_bosquegrande"] .bg-notes li {
+    position: relative;
+    margin: 0 0 10px;
+    padding: 0 0 0 22px;
+    color: #3C4A42;
+    font-size: 13px;
+    line-height: 1.55;
+}
+body[class*="page_bosquegrande"] .bg-notes li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2E7D4F 0%, #C98A1B 100%);
+}
+
+/* Destructive reinstall confirmation. */
+body[class*="page_bosquegrande"] .bg-reinstall .bg-danger-box {
+    max-width: 720px;
+    background: #fff;
+    border: 1px solid #E5B6B6;
+    border-left: 4px solid #B32D2E;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-top: 12px;
+}
+body[class*="page_bosquegrande"] .bg-reinstall h1 {
+    color: #B32D2E;
+}
+body[class*="page_bosquegrande"] .bg-reinstall h1::after {
+    background: #B32D2E;
+}
+body[class*="page_bosquegrande"] .bg-danger-lede {
+    font-size: 14px;
+    font-weight: 600;
+    color: #B32D2E;
+}
+body[class*="page_bosquegrande"] .bg-danger-box h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: #1F2A24;
+    margin: 18px 0 6px;
+}
+body[class*="page_bosquegrande"] .bg-danger-box ul {
+    margin: 0 0 6px 18px;
+    list-style: disc;
+    color: #3C4A42;
+}
+body[class*="page_bosquegrande"] .bg-danger-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+}
+body[class*="page_bosquegrande"] .bg-danger-actions form {
+    margin: 0;
+}
+body[class*="page_bosquegrande"] .button.bg-danger-btn {
+    background: #B32D2E;
+    border-color: #B32D2E;
+    color: #fff;
+    font-weight: 600;
+}
+body[class*="page_bosquegrande"] .button.bg-danger-btn:hover,
+body[class*="page_bosquegrande"] .button.bg-danger-btn:focus {
+    background: #8A2424;
+    border-color: #8A2424;
+    color: #fff;
+}
+
+/* Constituent finder and progressive data tools. */
+body[class*="page_bosquegrande"] .bg-people-finder {
+    max-width: 1180px;
+    margin: 18px 0 14px;
+    padding: 18px 20px;
+    border: 1px solid #D9E5D9;
+    border-radius: 12px;
+    background: #FFF;
+    box-shadow: 0 1px 3px rgba(31,42,36, .06);
+}
+body[class*="page_bosquegrande"] .bg-people-finder h2 {
+    margin: 0 0 12px;
+    color: #1F5130;
+}
+body[class*="page_bosquegrande"] .bg-people-search-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+body[class*="page_bosquegrande"] .bg-people-search-row input[type="search"] {
+    flex: 1 1 620px;
+    min-width: 240px;
+    min-height: 40px;
+    padding: 7px 12px;
+    border-color: #AFC7AF;
+    border-radius: 8px;
+    font-size: 15px;
+}
+body[class*="page_bosquegrande"] .bg-people-search-row .button {
+    min-height: 40px;
+    padding: 4px 22px;
+}
+body[class*="page_bosquegrande"] .bg-quick-views {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+}
+body[class*="page_bosquegrande"] .bg-filter-label {
+    margin-right: 3px;
+    color: #3C4A42;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+body[class*="page_bosquegrande"] .bg-quick-views .button {
+    border-radius: 999px;
+}
+body[class*="page_bosquegrande"] .bg-quick-views .button.is-active {
+    border-color: #1F5130;
+    background: #EAF4EA;
+    color: #1F5130;
+    box-shadow: inset 0 0 0 1px #1F5130;
+    font-weight: 700;
+}
+body[class*="page_bosquegrande"] .bg-more-filters {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #E4ECE4;
+}
+body[class*="page_bosquegrande"] .bg-more-filters > summary {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    color: #1F5130;
+    cursor: pointer;
+    font-weight: 700;
+}
+body[class*="page_bosquegrande"] .bg-filter-grid {
+    display: grid;
+    grid-template-columns: minmax(220px, 1.1fr) minmax(220px, 1fr) minmax(220px, 1fr);
+    gap: 12px;
+    margin-top: 12px;
+}
+body[class*="page_bosquegrande"] .bg-filter-group {
+    min-width: 0;
+    margin: 0;
+    padding: 14px;
+    border: 1px solid #D9E5D9;
+    border-radius: 10px;
+    background: #F8FBF8;
+}
+body[class*="page_bosquegrande"] .bg-filter-group legend {
+    padding: 0 5px;
+    color: #1F5130;
+    font-weight: 700;
+}
+body[class*="page_bosquegrande"] .bg-filter-group label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 11px;
+    color: #3C4A42;
+    font-weight: 600;
+}
+body[class*="page_bosquegrande"] .bg-filter-group select,
+body[class*="page_bosquegrande"] .bg-filter-group input[type="number"] {
+    width: 100%;
+    min-height: 36px;
+}
+body[class*="page_bosquegrande"] .bg-event-filter-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 7px;
+    margin-top: 6px;
+}
+body[class*="page_bosquegrande"] .bg-filter-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+body[class*="page_bosquegrande"] .bg-active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+    max-width: 1180px;
+    margin: 0 0 14px;
+}
+body[class*="page_bosquegrande"] .bg-active-filters a:not(.bg-clear-filters) {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border: 1px solid #BFD2BF;
+    border-radius: 999px;
+    background: #FFF;
+    color: #1F2A24;
+    text-decoration: none;
+}
+body[class*="page_bosquegrande"] .bg-active-filters a:hover,
+body[class*="page_bosquegrande"] .bg-active-filters a:focus {
+    border-color: #2E7D4F;
+    color: #1F5130;
+}
+body[class*="page_bosquegrande"] .bg-clear-filters {
+    margin-left: 3px;
+}
+body[class*="page_bosquegrande"] .bg-results-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    max-width: 1180px;
+    margin: 12px 0 8px;
+}
+body[class*="page_bosquegrande"] .bg-results-toolbar > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+body[class*="page_bosquegrande"] .bg-results-toolbar > div:first-child span {
+    color: #646970;
+    font-size: 12px;
+}
+body[class*="page_bosquegrande"] .bg-column-chooser {
+    position: relative;
+    z-index: 5;
+}
+body[class*="page_bosquegrande"] .bg-column-chooser > summary {
+    cursor: pointer;
+    list-style: none;
+}
+body[class*="page_bosquegrande"] .bg-column-chooser > summary::-webkit-details-marker {
+    display: none;
+}
+body[class*="page_bosquegrande"] .bg-column-chooser > div {
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px 16px;
+    width: 320px;
+    padding: 14px;
+    border: 1px solid #C4D6C4;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0 8px 24px rgba(31,42,36, .16);
+}
+body[class*="page_bosquegrande"] .bg-column-chooser label {
+    white-space: nowrap;
+}
+body[class*="page_bosquegrande"] .bg-bulk-actions {
+    position: sticky;
+    top: 32px;
+    z-index: 4;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    max-width: 1180px;
+    margin: 8px 0;
+    padding: 10px 12px;
+    border: 1px solid #94B694;
+    border-radius: 9px;
+    background: #F2F8F2;
+    box-shadow: 0 2px 8px rgba(31,42,36, .09);
+}
+body[class*="page_bosquegrande"] .bg-bulk-actions[hidden] {
+    display: none !important;
+}
+body[class*="page_bosquegrande"] .bg-bulk-actions > span {
+    flex: 1 1 320px;
+    color: #5A6A61;
+    font-size: 12px;
+}
+body[class*="page_bosquegrande"] .bg-constituent-table-wrap {
+    max-width: 100%;
+    overflow-x: auto;
+    border-radius: 8px;
+}
+body[class*="page_bosquegrande"] .bg-constituent-table [data-bg-column].is-hidden {
+    display: none;
+}
+body[class*="page_bosquegrande"] .bg-constituent-table th,
+body[class*="page_bosquegrande"] .bg-constituent-table td {
+    vertical-align: middle;
+}
+body[class*="page_bosquegrande"] .bg-row-actions {
+    min-width: 190px;
+    white-space: nowrap;
+}
+body[class*="page_bosquegrande"] .bg-row-actions .button + .button {
+    margin-left: 4px;
+}
+body[class*="page_bosquegrande"] .bg-data-tools-heading {
+    max-width: 760px;
+    margin-top: 18px;
+}
+body[class*="page_bosquegrande"] .bg-data-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: 14px;
+    max-width: 1100px;
+    margin-top: 16px;
+}
+body[class*="page_bosquegrande"] .bg-data-tool-card {
+    padding: 18px;
+    border: 1px solid #D9E5D9;
+    border-radius: 12px;
+    background: #FFF;
+    box-shadow: 0 1px 3px rgba(31,42,36, .06);
+}
+body[class*="page_bosquegrande"] .bg-data-tool-card h3 {
+    margin: 0 0 8px;
+    color: #1F5130;
+}
+body[class*="page_bosquegrande"] .bg-data-tool-card > p:first-of-type {
+    min-height: 44px;
+}
+body[class*="page_bosquegrande"] .bg-file-label {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    font-weight: 600;
+}
+body[class*="page_bosquegrande"] .bg-tool-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+@media screen and (max-width: 960px) {
+    body[class*="page_bosquegrande"] .bg-filter-grid,
+    body[class*="page_bosquegrande"] .bg-data-tools-grid {
+        grid-template-columns: 1fr;
+    }
+    body[class*="page_bosquegrande"] .bg-data-tool-card > p:first-of-type {
+        min-height: 0;
+    }
+}
+@media screen and (max-width: 782px) {
+    body[class*="page_bosquegrande"] .bg-people-finder {
+        padding: 14px;
+    }
+    body[class*="page_bosquegrande"] .bg-people-search-row,
+    body[class*="page_bosquegrande"] .bg-results-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+    body[class*="page_bosquegrande"] .bg-people-search-row input[type="search"] {
+        flex-basis: auto;
+        width: 100%;
+    }
+    body[class*="page_bosquegrande"] .bg-filter-label {
+        flex-basis: 100%;
+    }
+    body[class*="page_bosquegrande"] .bg-column-chooser > div {
+        right: auto;
+        left: 0;
+        width: min(320px, calc(100vw - 50px));
+    }
+    body[class*="page_bosquegrande"] .bg-bulk-actions {
+        top: 46px;
+    }
+}
+
+/* BosqueGrande 3.99 event editor */
+.post-type-bg_event #poststuff #bgev_meta .inside { margin: 0; padding: 0; }
+.post-type-bg_event #bgev_meta { border: 0; box-shadow: none; background: transparent; }
+.post-type-bg_event #bgev_meta > .postbox-header { display: none; }
+.bg399-event-editor {
+    --bg399-green: #1F5130;
+    --bg399-purple: #694083;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.bg399-editor-intro,
+.bg399-editor-section {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+.bg399-editor-intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 20px;
+    border-left: 5px solid var(--bg399-green);
+}
+.bg399-editor-intro strong { display: block; color: var(--bg399-green); font-size: 18px; }
+.bg399-editor-intro span { color: #50575e; }
+.bg399-source { font-size: 12px; text-align: right; }
+.bg399-editor-section { padding: 20px; }
+.bg399-editor-section h3 { margin: 0 0 14px; color: var(--bg399-green); font-size: 16px; }
+.bg399-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.bg399-field > span,
+.bg399-field-heading > span { font-weight: 700; color: #1d2327; }
+.bg399-field small,
+.bg399-field-heading small { color: #646970; font-weight: 400; }
+.bg399-field input[type="text"],
+.bg399-field input[type="date"],
+.bg399-field input[type="time"],
+.bg399-field input[type="tel"],
+.bg399-field input[type="url"],
+.bg399-field textarea { min-height: 40px; }
+.bg399-field-title input { font-size: 20px; line-height: 1.4; padding: 8px 10px; }
+.bg399-description-field { gap: 10px; }
+.bg399-field-heading { display: flex; flex-direction: column; gap: 4px; }
+.bg399-grid { display: grid; gap: 14px; }
+.bg399-grid-4 { grid-template-columns: repeat(4, minmax(140px, 1fr)); }
+.bg399-grid-2 { grid-template-columns: repeat(2, minmax(240px, 1fr)); }
+.bg399-photo-layout { display: flex; gap: 18px; align-items: center; }
+.bg399-photo-preview {
+    flex: 0 0 280px;
+    height: 170px;
+    border: 1px dashed #8c8f94;
+    border-radius: 10px;
+    background: #f6f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: #646970;
+}
+.bg399-photo-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bg399-photo-actions { flex: 1 1 auto; }
+.bg399-photo-actions .button-link-delete { margin-left: 10px; }
+.bg399-url-row { display: grid; grid-template-columns: minmax(240px, 1fr) auto auto; gap: 8px; align-items: end; }
+.bg399-url-row .bg399-field { margin-bottom: 0; }
+.bg399-url-display { margin-top: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.bg399-native-registration { padding: 10px 12px; background: #f0f6fc; border-left: 4px solid #2271b1; }
+@media screen and (max-width: 980px) {
+    .bg399-grid-4 { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+    .bg399-grid-2 { grid-template-columns: 1fr; }
+}
+@media screen and (max-width: 782px) {
+    .bg399-editor-intro { align-items: flex-start; flex-direction: column; }
+    .bg399-source { text-align: left; }
+    .bg399-grid-4 { grid-template-columns: 1fr; }
+    .bg399-photo-layout { align-items: stretch; flex-direction: column; }
+    .bg399-photo-preview { flex-basis: auto; width: 100%; }
+    .bg399-url-row { grid-template-columns: 1fr; }
+    .bg399-url-row .button { width: 100%; min-height: 42px; }
+}
