@@ -17,7 +17,7 @@ This is an early release. Read "What this protects against" before putting real 
 | `docker-compose.yml` | Three containers: MariaDB, WordPress (Apache and PHP 8.3), and Caddy for HTTPS |
 | `wordpress/` | Image build: hardened PHP and Apache settings, multisite rewrite rules, the start script |
 | `mu-plugins/bosquegrande-hosted.php` | Per-organization keyrings, sealed with the master key; lockdown of the public surface and admin |
-| `plugin/bosquegrande/` | The BosqueGrande plugin that goes into the image (included in the release zip) |
+| `plugin/` | The plugins that go into the image: BosqueGrande and its three companions (included in the release zip) |
 | `mariadb/encryption.cnf` | Encrypts database files, logs, and temporary files at rest |
 | `Caddyfile` | HTTPS, security headers, and a content security policy for public pages |
 | `bin/` | `init.sh`, `install.sh`, `add-organization.sh`, `backup.sh`, `wp.sh` |
@@ -70,6 +70,16 @@ The must-use plugin and image:
 - throttle failed logins (10 per 15 minutes per address) and pass real client addresses from Caddy to WordPress;
 - disable PHP's shell functions and refuse to run PHP from uploads;
 - keep uploaded import spreadsheets in `/var/lib/bosquegrande/private/`, outside the web root, one folder per organization.
+
+## Companion plugins
+
+The image also carries the three companion plugins: Floating Assistant (a question button answered from each organization's own training info), Floating Actions (subscribe, donate, and custom buttons with a QR code), and Organizer Launcher. Organization administrators cannot install or switch plugins in the hosted edition, so the operator turns them on for an organization:
+
+```sh
+bin/wp.sh plugin activate bosquegrande-floating-assistant --url=https://crm.example.org/riverbend/
+```
+
+or for every organization at once with `--network`. Each organization then manages its own training info and button settings under BosqueGrande in its dashboard, and answers use the service provider key that organization entered in Assisted Tools.
 
 ## Routine operation
 

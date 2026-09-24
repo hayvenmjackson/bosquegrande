@@ -389,6 +389,14 @@ final class IntelligenceModule implements ModuleInterface
         if (isset($defaults['event_search_too_long'])) {
             $defaults['event_search_too_long']['required_tokens'] = ['max'];
         }
+        $visitor = [
+            'assistant_visitor_escalated' => ['Visitor assistant: question it could not answer, team notified ({contact})', 'I don\'t have a reliable answer to that, so I\'ve let our team know it came up. For a reply, {contact}.'],
+            'assistant_visitor_unanswered' => ['Visitor assistant: question it could not answer ({contact})', 'I don\'t have a reliable answer to that. For help, {contact}.'],
+        ];
+        foreach ($visitor as $key => [$label, $text]) {
+            if (isset($defaults[$key])) continue;
+            $defaults[$key] = ['label' => $label, 'text' => $text, 'group' => 'Visitor assistant'];
+        }
         return $defaults;
     }
 

@@ -39,12 +39,16 @@ final class OrganizerAppRenderer
      * Home-page shortcut to the organizer app, shown to signed-in organizers.
      * Sites that want it visible to everyone can return true from the
      * bg_organizer_launcher_public filter; the app still requires sign-in.
+     * bg_organizer_launcher_show has the final say on any public page, and
+     * is told whether the visitor is a signed-in organizer.
      */
     private function showLauncher(): bool
     {
-        if (is_admin() || !is_front_page()) return false;
-        if ((bool) apply_filters('bg_organizer_launcher_public', false)) return true;
-        return is_user_logged_in() && $this->access->canUsePortal(get_current_user_id());
+        if (is_admin()) return false;
+        $isOrganizer = is_user_logged_in() && $this->access->canUsePortal(get_current_user_id());
+        $default = is_front_page()
+            && ((bool) apply_filters('bg_organizer_launcher_public', false) || $isOrganizer);
+        return (bool) apply_filters('bg_organizer_launcher_show', $default, $isOrganizer);
     }
 
     public function homepageLauncherStyles(): void

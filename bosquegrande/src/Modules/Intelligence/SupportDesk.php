@@ -12,8 +12,11 @@ if (!defined('ABSPATH')) exit;
 /**
  * The internal support desk behind the assistant.
  *
- * The assistant is grounded on the shipped staff reference. When that
- * reference and the site-safe facts do not answer a question, the assistant
+ * The assistant is grounded on reference material: the shipped staff
+ * reference for staff questions, and whatever the organization adds through
+ * bg_assistant_reference (the Floating Assistant companion's training info)
+ * for either audience. When that reference and the site-safe facts do not
+ * answer a question, the assistant
  * can notify the site's designated administrator instead of guessing. The
  * default recipient is the calendar's designated contact, falling back to
  * WordPress's Administration Email Address; deployments can override it with
@@ -27,6 +30,7 @@ final class SupportDesk
 {
     public const ESCALATE_MARKER = '[ESCALATE]';
     private const DAILY_CAP = 25;
+    private const OWN_REFERENCE_CAP = 16000;
 
     public function __construct(private Logger $logger)
     {
@@ -63,9 +67,43 @@ final class SupportDesk
         return $docs;
     }
 
-    /** The reply a person sees after an attempted human escalation. */
-    public static function escalationReply(bool $sent = true): string
+    /**
+     * Reference material for one question, ready to append to the prompt.
+     * Staff questions get the shipped staff reference. Visitor questions
+     * never do, since it describes internal screens and roles. Either
+     * audience also gets the organization's own material, chosen for the
+     * question by whoever answers bg_assistant_reference (audience is
+     * 'staff' or 'visitor').
+     */
+    public static function reference(string $channel, string $question): string
     {
+        $audience = $channel === 'admin' ? 'staff' : 'visitor';
+        $parts = [];
+        $own = trim((string) apply_filters('bg_assistant_reference', '', $audience, $question));
+        if ($own !== '') $parts[] = "ORGANIZATION REFERENCE:\n" . substr($own, 0, self::OWN_REFERENCE_CAP);
+        if ($audience === 'staff') {
+            $docs = self::docs();
+            if ($docs !== '') $parts[] = "STAFF REFERENCE:\n" . $docs;
+        }
+        return $parts ? "\n\n" . implode("\n\n", $parts) : '';
+    }
+
+    /**
+     * The reply a person sees after an attempted human escalation. Visitors
+     * cannot be answered by email (the question arrives without their
+     * address), so they are pointed at the organization's own contact
+     * instead of an internal support process.
+     */
+    public static function escalationReply(bool $sent = true, string $channel = 'admin'): string
+    {
+        if ($channel !== 'admin') {
+            $email = \BosqueGrande\Core\Organization::publicEmail();
+            $contact = $email !== '' ? 'email us at ' . $email : 'contact us directly';
+            $text = $sent
+                ? bg_str('assistant_visitor_escalated', 'I don\'t have a reliable answer to that, so I\'ve let our team know it came up. For a reply, {contact}.')
+                : bg_str('assistant_visitor_unanswered', 'I don\'t have a reliable answer to that. For help, {contact}.');
+            return str_replace('{contact}', $contact, $text);
+        }
         return $sent
             ? 'I want to get this one right, so I\'ve sent your question to this site\'s designated administrator. Please follow your organization\'s internal support process for any follow-up.'
             : 'I couldn\'t send this question automatically. Please contact this site\'s designated administrator through your organization\'s internal support process.';

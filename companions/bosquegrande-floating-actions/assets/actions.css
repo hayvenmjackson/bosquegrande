@@ -1,0 +1,12 @@
+/* BosqueGrande Floating Actions. Position, color, and stacking come from the settings screen. */
+.bgcf-wrap{position:fixed;display:flex;flex-direction:column;gap:10px;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.bgcf-action{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 20px;border-radius:999px;
+  background:var(--bgcf-color);color:var(--bgcf-on)!important;font-size:15px;font-weight:600;line-height:1.1;letter-spacing:.01em;
+  text-decoration:none!important;box-shadow:0 5px 16px rgba(0,0,0,.24)}
+.bgcf-secondary{background:#fff;color:var(--bgcf-color)!important;border:2px solid var(--bgcf-color);box-shadow:0 4px 12px rgba(0,0,0,.16)}
+.bgcf-action:hover{filter:brightness(1.08)}
+.bgcf-action:focus-visible,.bgcf-qr:focus-visible{outline:3px solid var(--bgcf-color);outline-offset:3px}
+.bgcf-qr{display:block;width:96px;padding:4px;background:#fff;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,.2);line-height:0}
+.bgcf-qr svg{display:block;width:100%;height:auto}
+@media (max-width:768px){.bgcf-qr{display:none}.bgcf-action{padding:9px 16px;font-size:14px}}
+@media (prefers-reduced-motion:no-preference){.bgcf-action{transition:filter .15s ease}}

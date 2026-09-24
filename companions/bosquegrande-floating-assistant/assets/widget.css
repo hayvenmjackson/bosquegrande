@@ -1,0 +1,23 @@
+/* BosqueGrande Floating Assistant. Position, color, and stacking come from the settings screen. */
+#bgca-wrap{position:fixed;display:flex;flex-direction:column;gap:10px;font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#1d2327}
+#bgca-wrap *{box-sizing:border-box}
+#bgca-btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:10px 18px 10px 14px;border:0;border-radius:999px;cursor:pointer;
+  background:var(--bgca-color);color:var(--bgca-on);font-family:inherit;font-size:15px;font-weight:600;line-height:1.1;box-shadow:0 6px 18px rgba(0,0,0,.24)}
+#bgca-btn:hover{filter:brightness(1.08)}
+#bgca-btn:focus-visible,#bgca-close:focus-visible,#bgca-send:focus-visible{outline:3px solid var(--bgca-color);outline-offset:3px}
+#bgca-panel{width:min(360px,calc(100vw - 32px));background:#fff;border:1px solid #dcdcde;border-radius:14px;box-shadow:0 12px 36px rgba(0,0,0,.22);overflow:hidden;display:flex;flex-direction:column}
+#bgca-panel[hidden]{display:none}
+#bgca-head{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:11px 14px;background:var(--bgca-color);color:var(--bgca-on);font-weight:700}
+#bgca-close{background:none;border:0;color:inherit;font-size:22px;line-height:1;cursor:pointer;padding:2px 6px;border-radius:6px}
+#bgca-log{max-height:min(360px,50vh);overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.bgca-m{max-width:88%;padding:8px 11px;border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere}
+.bgca-user{align-self:flex-end;background:#f0f0f1}
+.bgca-bot{align-self:flex-start;background:#fff;border:1px solid #dcdcde}
+#bgca-form{display:flex;gap:6px;padding:10px;border-top:1px solid #dcdcde}
+#bgca-in{flex:1;min-width:0;border:1px solid #8c8f94;border-radius:8px;padding:8px 10px;font:inherit;color:inherit;background:#fff}
+#bgca-send{border:0;border-radius:8px;padding:8px 14px;background:var(--bgca-color);color:var(--bgca-on);font-weight:700;cursor:pointer}
+#bgca-send:disabled{opacity:.55;cursor:default}
+#bgca-note{margin:0;padding:0 12px 10px;font-size:12px;color:#50575e}
+#bgca-form .screen-reader-text{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+@media (max-width:480px){#bgca-btn span{display:none}#bgca-btn{padding:12px;min-width:48px;justify-content:center}}
+@media (prefers-reduced-motion:no-preference){#bgca-btn{transition:filter .15s ease}}

@@ -19,7 +19,8 @@ Set up a throwaway WordPress site with BosqueGrande active and the setup finishe
 ```sh
 export BG_TEST_DISPOSABLE=1
 export BG_TEST_HOST=localhost:8080     # the host the site answers on
-for t in keystore registration admin newsletter walkin multisite; do
+# export BG_TEST_PATH=/riverbend       # on a multisite network, the site to test
+for t in keystore registration admin newsletter walkin assistant companions multisite; do
   php dev/tests/$t.php /path/to/wordpress
 done
 ```
@@ -31,6 +32,8 @@ done
 | `admin.php` | Regions and postal rules, the payment ledger and currency lock, the QuickBooks worksheet with classes by region, grant reports, grant tag keyword rules |
 | `newsletter.php` | Queuing and sending to the default group, the one-click unsubscribe header, signed unsubscribe links |
 | `walkin.php` | Organizer walk-ins: a saved person is used only on a name plus a matching email or phone; near matches go to staff review |
+| `assistant.php` | Floating Assistant companion: training info reaches the right audience, visitors never get staff-only material or the staff reference, the chat route answers and enforces its limits, escalation replaces guesses. Uses a recording stand-in for the service provider, so no key is needed. Skips when the companion is inactive |
+| `companions.php` | Floating Actions and Organizer Launcher: actions follow settings, unsafe custom links are dropped, QR codes and capacity tables, launcher audience rules. Skips unless both are active |
 | `multisite.php` | On a network: signed links and account links from one site do not work on another, with a shared keyring or per-site keyrings. Skips on a single site |
 
 ## HTTP tests

@@ -12,7 +12,8 @@ if ($dir === '' || !is_file($dir . '/wp-load.php')) {
     exit(2);
 }
 $_SERVER['HTTP_HOST'] = getenv('BG_TEST_HOST') ?: 'localhost';
-$_SERVER['REQUEST_URI'] = $bgTestUri ?? '/';
+// On a multisite network, BG_TEST_PATH picks the site (for example /riverbend).
+$_SERVER['REQUEST_URI'] = rtrim((string) getenv('BG_TEST_PATH'), '/') . ($bgTestUri ?? '/');
 $_SERVER['REMOTE_ADDR'] = '203.0.113.' . random_int(1, 250);
 require $dir . '/wp-load.php';
 

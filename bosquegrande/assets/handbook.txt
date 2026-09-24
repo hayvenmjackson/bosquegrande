@@ -2,7 +2,7 @@ BOSQUEGRANDE 5.0 STAFF REFERENCE
 
 PURPOSE AND SUPPORT
 
-This plain-text reference grounds the BosqueGrande Assistant. Your organization may replace it with its own guide through the bg_assistant_docs filter.
+This plain-text reference grounds the BosqueGrande Assistant when staff ask questions. Visitors never see it. To teach the Assistant about your own organization, install the Floating Assistant companion and add material under BosqueGrande > Assistant Training. Developers can also replace this reference through the bg_assistant_docs filter.
 
 Your site's administrator is the first line of support. When the Assistant cannot answer from this reference and the site's aggregate facts, it can email the calendar's designated contact, the WordPress administration email address, or another internal address the site owner has configured. BosqueGrande has no vendor help line and makes no promise about support hours. Follow your organization's own support process.
 

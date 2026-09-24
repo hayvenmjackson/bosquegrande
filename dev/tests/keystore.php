@@ -3,6 +3,9 @@
 require __DIR__ . '/bootstrap.php';
 use BosqueGrande\Core\KeyStore;
 
+// These checks are about the file formats themselves, so start without any
+// seal key a hosting plugin may supply.
+remove_all_filters('bg_keyring_seal_key');
 $dir = sys_get_temp_dir() . '/bgks-' . bin2hex(random_bytes(3));
 mkdir($dir, 0700);
 $seal = random_bytes(32);

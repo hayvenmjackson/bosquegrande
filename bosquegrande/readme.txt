@@ -65,6 +65,8 @@ A hosted edition runs the same plugin inside a locked-down WordPress with a sepa
 * Multisite: signed links and the link between a WordPress account and a contact record belong to one site, even when sites share a keyring file.
 * Deleting the plugin with "Delete all BosqueGrande data" turned on now also removes events, newsletters, and tags.
 * Security: a sign-in link is confirmed with a button in the browser that opened it, so mail scanners and other sites cannot use it; organizer sign-in links work only for organizer-only accounts; forms submitted without signing in fill blank answers but never overwrite saved ones; organizer walk-ins attach to a saved person only on a name plus a matching email or phone; attendee lookups and walk-ins are rate-limited and recorded.
+* The Assistant can answer from your organization's own training info, added with the Floating Assistant companion. Visitor questions never receive the internal staff reference, and questions it cannot answer point visitors to your public contact email.
+* Developers: the bg_assistant_reference filter supplies reference passages per audience and question, and bg_organizer_launcher_show decides where the Organizer App button appears.
 * The activity log is trimmed to the last year.
 * Tested with WordPress 7.0 and PHP 8.4.
 

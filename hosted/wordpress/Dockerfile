@@ -29,7 +29,7 @@ COPY wordpress/wp-config-hosted.php /etc/bosquegrande/wp-config-hosted.php
 COPY wordpress/htaccess-multisite /usr/src/wordpress/.htaccess
 COPY wordpress/bosquegrande-start /usr/local/bin/bosquegrande-start
 COPY mu-plugins/ /usr/src/wordpress/wp-content/mu-plugins/
-COPY plugin/bosquegrande/ /usr/src/wordpress/wp-content/plugins/bosquegrande/
+COPY plugin/ /usr/src/wordpress/wp-content/plugins/
 
 RUN rm -rf /usr/src/wordpress/wp-content/plugins/akismet /usr/src/wordpress/wp-content/plugins/hello.php \
  && install -d -o www-data -g www-data -m 0700 /var/lib/bosquegrande /var/lib/bosquegrande/keyrings /var/lib/bosquegrande/private \

@@ -47,6 +47,13 @@ final class Organization
         return is_email($email) ? $email : '';
     }
 
+    /** The contact email the organization entered itself, with no fallback to the WordPress admin address. */
+    public static function publicEmail(): string
+    {
+        $email = sanitize_email((string) self::get('org_contact_email'));
+        return is_email($email) ? $email : '';
+    }
+
     /** Optional public phone number; empty when not set. */
     public static function contactPhone(): string
     {

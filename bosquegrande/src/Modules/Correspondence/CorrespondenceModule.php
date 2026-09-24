@@ -542,7 +542,7 @@ final class CorrespondenceModule implements ModuleInterface
             . '<input type="email" name="email" required autocomplete="email" aria-label="' . esc_attr(self::word('newsletter_email_label', 'Email address')) . '" placeholder="' . esc_attr(self::word('newsletter_email_placeholder', 'you@example.com')) . '" style="flex:1;min-width:200px;padding:10px;border:1px solid #ccc;border-radius:8px">'
             . '<input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">'
             . '<input type="hidden" name="group" value="' . esc_attr($slug) . '">'
-            . '<button type="submit" style="background:#2E7D4F;color:#fff;border:0;border-radius:999px;padding:10px 22px;font-weight:700;cursor:pointer">'
+            . '<button type="submit" style="background:var(--bgc-primary,#2E7D4F);color:#fff;border:0;border-radius:999px;padding:10px 22px;font-weight:700;cursor:pointer">'
             . esc_html($buttonLabel) . '</button>'
             . '<p class="bg-subscribe-msg" role="status" style="flex-basis:100%;margin:4px 0 0;font-weight:600"></p></form>'
             . '<script>(function(){var f=document.getElementById(' . wp_json_encode($id) . ');if(!f)return;'
